@@ -1,9 +1,14 @@
 package io.airmick.js;
 
-public class Readability {
+public class Readability implements ReadableInterface{
     private int count_letters;
     private int count_words;
     private int count_sentences;
+
+    public Readability()
+    {
+
+    }
 
     public Readability(int count_letters, int count_words, int count_sentences)
     {
@@ -12,33 +17,30 @@ public class Readability {
         this.count_sentences = count_sentences;
     }
 
-    public int getCount_letters()
+    @Override
+    public int count_letters(String input)
     {
-        return count_letters;
+        int count = 0;
+        char[] convert = input.toCharArray();
+        for (int i = 0, len = input.length(); i < len; i++)
+        {
+            if (Character.isLetter(convert[i]))
+            {
+                count += 1;
+            }
+        }
+        return count;
     }
 
-    public void setCount_letters(int count_letters)
+    @Override
+    public int count_words(String input)
     {
-        this.count_letters = count_letters;
+        return 1;
     }
 
-    public int getCount_words()
+    @Override
+    public int count_sentences(String input)
     {
-        return count_words;
-    }
-
-    public void setCount_words(int count_words)
-    {
-        this.count_words = count_words;
-    }
-
-    public int getCount_sentences()
-    {
-        return count_sentences;
-    }
-
-    public void setCount_sentences(int count_sentences)
-    {
-        this.count_sentences = count_sentences;
+        return 1;
     }
 }
