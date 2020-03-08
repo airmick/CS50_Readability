@@ -22,12 +22,14 @@ public class ReadabilityTest {
     @Test
     public void count_letters()
     {
-        int count = readability.count_letters("abcdef123");
-        Assert.assertEquals(6, count);
+        int count = readability.count_letters("abcdef    ad");
+        Assert.assertEquals(8, count);
     }
 
     @Test
     public void count_words() {
+        int count = readability.count_words("michael els james everyLong");
+        Assert.assertEquals(4, count);
     }
 
     @Test

@@ -26,7 +26,7 @@ public class Readability implements ReadableInterface{
         {
             if (Character.isLetter(convert[i]))
             {
-                count += 1;
+                count ++;
             }
         }
         return count;
@@ -35,7 +35,20 @@ public class Readability implements ReadableInterface{
     @Override
     public int count_words(String input)
     {
-        return 1;
+        int count = 0;
+        char[] convert = input.toCharArray();
+        for (int i = 0, len = input.length(); i < len; i++)
+        {
+            if (!(Character.isWhitespace(convert[i])))
+            {
+                while (!(Character.isWhitespace(convert[i])) && i < len)
+                {
+                    i++;
+                }
+                count++;
+            }
+        }
+        return count;
     }
 
     @Override
