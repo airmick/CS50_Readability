@@ -1,20 +1,10 @@
 package io.airmick.js;
 
 public class Readability implements ReadableInterface{
-    private int count_letters;
-    private int count_words;
-    private int count_sentences;
 
     public Readability()
     {
 
-    }
-
-    public Readability(int count_letters, int count_words, int count_sentences)
-    {
-        this.count_letters = count_letters;
-        this.count_words = count_words;
-        this.count_sentences = count_sentences;
     }
 
     @Override
@@ -41,7 +31,7 @@ public class Readability implements ReadableInterface{
         {
             if (!(Character.isWhitespace(convert[i])))
             {
-                while (!(Character.isWhitespace(convert[i])) && i < len)
+                while (!(Character.isWhitespace(convert[i])) && i < len -1)
                 {
                     i++;
                 }
@@ -54,6 +44,23 @@ public class Readability implements ReadableInterface{
     @Override
     public int count_sentences(String input)
     {
-        return 1;
+        int count = 0;
+        for (int i = 0, len = input.length(); i < len; i++)
+        {
+            if (input.charAt(i) == '.' || input.charAt(i) == '?' || input.charAt(i) == '!')
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int colemanIndex(int letter, int sentence, int word)
+    {
+        float L = (float)(letter * 100) / word;
+        float S = (float)(sentence * 100) / word;
+        float index = (float) ((0.0588 * L) - (0.296 * S) - 15.8);
+
+        return Math.round(index);
     }
 }
